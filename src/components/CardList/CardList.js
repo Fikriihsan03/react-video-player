@@ -1,15 +1,15 @@
 import Card from "./Card";
 // import data from "../../data/moviesData.json";
 import { useEffect, useState } from "react";
-const CardList = () => {
+const CardList = ({ search }) => {
   const [movies, setMovies] = useState();
   useEffect(() => {
-    fetch("http://localhost:3005/movie")
+    fetch(`${process.env.REACT_APP_API}/movie?title=${search}`)
       .then((res) => res.json())
       .then((data) => {
         setMovies(data);
       });
-  });
+  }, [search]);
   return (
     <>
       {movies?.map((_, i) => {
